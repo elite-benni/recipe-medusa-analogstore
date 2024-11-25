@@ -17,26 +17,26 @@ export function provideMedusaConfig(config: Config) {
 
 @Injectable({ providedIn: 'root' })
 export class MedusaService {
-  #sdk: Medusa;
+  // #sdk: Medusa;
   #medusaConfig = inject(MEDUSA_CONFIG);
   #http = inject(HttpClient);
 
   constructor() {
-    this.#sdk = new Medusa({
-      debug: import.meta.env['NODE_ENV'] === 'development',
-      ...this.#medusaConfig,
-    });
+    // this.#sdk = new Medusa({
+    //   debug: import.meta.env['NODE_ENV'] === 'development',
+    //   ...this.#medusaConfig,
+    // });
   }
 
   productList$() {
-    // return this.#http.get<StoreProductListResponse>(
-    //   `${this.#medusaConfig.baseUrl}/store/products`,
-    //   {
-    //     headers: {
-    //       'x-publishable-api-key': this.#medusaConfig.publishableKey || '',
-    //     },
-    //   }
-    // );
+    return this.#http.get<StoreProductListResponse>(
+      `${this.#medusaConfig.baseUrl}/store/products`,
+      {
+        headers: {
+          'x-publishable-api-key': this.#medusaConfig.publishableKey || '',
+        },
+      }
+    );
 
     return from(this.#sdk.store.product.list());
   }
