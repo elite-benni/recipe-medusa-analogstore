@@ -10,8 +10,8 @@ zerops:
         IMGPROXY_SALT: ${imgproxy_IMGPROXY_SALT}
         IMGPROXY_URL: ${PROJECT_IMGPROXY_INSTANCE_URL}
       buildCommands:
-        - npm i
-        - npm run build
+        - pnpm i
+        - pnpm run build
       deployFiles:
         - dist
     run:
