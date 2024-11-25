@@ -38,6 +38,6 @@ export class MedusaService {
       }
     );
 
-    return from(this.#sdk.store.product.list());
+    // return from(this.#sdk.store.product.list());
   }
 }
