@@ -1,36 +1,37 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MedusaService } from '../services/medusa.service';
-import { NgOptimizedImage } from '@angular/common'
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    NgOptimizedImage
-  ],
+  imports: [NgOptimizedImage],
   template: `
-
-    <h1 class="text-3xl font-bold text-white-900 pb-4">Analog.js x Spartan x Medusa.js x Zerops.io</h1>
+    <h1 class="text-3xl font-bold text-white-900 pb-4">
+      Analog.js x Spartan x Medusa.js x Zerops.io
+    </h1>
+    <p class="text-white-500">
+      This is a simple storefront built with Angular, Medusa.js, and Zerops.io.
+    </p>
 
     @for (item of products()?.products; track item.id) {
-      <div class="mb-6">
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-white-800 mb-2">
+        {{ item.title }}
+      </h3>
 
-        <h3 class="text-xl font-semibold text-white-800 mb-2">{{ item.title }}</h3>
-
-        @if (item.thumbnail) {
-          <img
-            [ngSrc]="item.thumbnail"
-            [alt]="item.title"
-            [width]="600"
-            [height]="600"
-            class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-          />
-        }
-
-      </div>
+      @if (item.thumbnail) {
+      <img
+        [ngSrc]="item.thumbnail"
+        [alt]="item.title"
+        [width]="600"
+        [height]="600"
+        class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+      />
+      }
+    </div>
     }
-
   `,
   styles: `
 
@@ -39,5 +40,4 @@ import { NgOptimizedImage } from '@angular/common'
 export default class HomeComponent {
   #medusa = inject(MedusaService);
   products = toSignal(this.#medusa.productList$());
-
 }
